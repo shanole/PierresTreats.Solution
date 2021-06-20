@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Flavor
+
+<h4>Edit this flavor: @Html.DisplayFor(model => model.Description)</h4>
+
+@using(Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.FlavorId)
+  @Html.Label("Flavor description")
+  @Html.EditorFor(model => model.Description, new { @class = "form-control", required="required"})
+
+  @Html.Label("Mark if vegan")
+  @Html.EditorFor(model => model.IsVegan, new { @required="required"}) <br/>
+
+  @Html.Label("Mark if gluten-free")
+  @Html.EditorFor(model => model.IsGlutenFree, new { @required="required"})
+
+  <input type="submit" value="Save" class="btn btn-default" required="true" />
+}
+
+<hr />
+<ul class="menu-links">
+  <li>@Html.ActionLink("Home","Index","Home")</li>
+  <li>@Html.ActionLink("Back to all flavors", "Index")</li>
+  <li>@Html.ActionLink("Back to flavor details","Details", new {id = Model.FlavorId})</li>
+</ul>

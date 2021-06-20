@@ -1,0 +1,39 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Flavor
+@using PierresTreats.Models
+
+<h1>Flavor details</h1>
+<h3>@Html.DisplayFor(model => model.Description)</h3>
+
+@if (Model.IsVegan)
+{
+  <p class="vegan">Vegan</p>
+}
+@if (Model.IsGlutenFree)
+{
+  <p class="gluten-free">Gluten-free</p>
+}
+
+<p>List of treats available with this flavor:</p>
+@if (Model.JoinEntities.Count == 0)
+{
+  <li>There are no treats of this flavor.</li>
+}
+@foreach(FlavorTreat join in Model.JoinEntities)
+{
+  @join.Treat.Name
+}
+
+<ul class="menu-links">
+  <li>@Html.ActionLink("Edit flavor details","Edit", new {id = Model.FlavorId })</li>
+  <li>@Html.ActionLink("Delete this flavor","Delete", new {id = Model.FlavorId })</li>
+  <li>@Html.ActionLink("Back to all flavors","Index")</li>
+</ul>
+
+<hr />
+<ul class="menu-links">
+  <li>@Html.ActionLink("Home","Index","Home")
+</ul>
