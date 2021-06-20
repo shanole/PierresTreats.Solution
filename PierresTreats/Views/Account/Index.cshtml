@@ -8,7 +8,7 @@
 <hr />
 @if (User.Identity.IsAuthenticated)
 {
-  <p>You are logged in as @User.Identity.Name.</p>
+  <p>You are logged in as @User.Identity.Name. Now you can help add and manage flavors and treats for our bakery!</p>
 
   <ul class="menu-links">
   <li>@Html.ActionLink("Manage flavors","Index","Flavors")</li>
