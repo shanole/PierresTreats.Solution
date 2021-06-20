@@ -11,6 +11,7 @@ using System.Security.Claims;
 
 namespace PierresTreats.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly PierresTreatsContext _db;
@@ -20,9 +21,12 @@ namespace PierresTreats.Controllers
       _userManager = userManager;
       _db = db;
     }
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
       List<Treat> allTreats = _db.Treats.OrderBy(m => m.Name).ToList();
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      ViewBag.UserTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(allTreats);
     }
     public ActionResult Create()
@@ -31,8 +35,11 @@ namespace PierresTreats.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Treat treat, int flavorId)
+    public async Task<ActionResult> Create(Treat treat, int flavorId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      treat.User = currentUser;
       _db.Treats.Add(treat);
       _db.SaveChanges();
       if (flavorId != 0)
@@ -45,6 +52,7 @@ namespace PierresTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       Treat thisTreat = _db.Treats

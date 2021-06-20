@@ -12,12 +12,22 @@
     <p>There are no treats yet.</p>
   }
 
-  <ul>
-    @foreach (Treat treat in Model)
-    {
-      <li>@Html.ActionLink($"{treat.Name}","Details", new { id = treat.TreatId})</li>
-    }
-  </ul>
+ <div class="row">
+    <div class="col-md-6">
+      <h4>All flavors:</h4>
+      @foreach(Treat treat in Model)
+      {
+        <li>@Html.ActionLink($"{treat.Name}","Details", "Treats", new {id = treat.TreatId})</li>
+      }
+    </div>
+    <div class="col-md-6">
+      <h4>Your flavors:</h4>
+        @foreach (Treat treat in ViewBag.UserTreats)
+        {
+        <li>@Html.ActionLink($"{treat.Name}","Details", "Treats", new {id = treat.TreatId})</li>
+        }
+    </div>
+  </div>
 
 
 <hr />

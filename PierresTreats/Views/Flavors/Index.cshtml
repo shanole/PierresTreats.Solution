@@ -12,12 +12,23 @@
     <p>There are no flavors yet.</p>
   }
 
-  <ul>
-    @foreach (Flavor flavor in Model)
-    {
-      <li>@Html.ActionLink($"{flavor.Description}","Details", new { id = flavor.FlavorId})</li>
-    }
-  </ul>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>All flavors:</h4>
+      @foreach(Flavor flavor in Model)
+      {
+        <li>@Html.ActionLink($"{flavor.Description}","Details", "Flavors", new {id = flavor.FlavorId})</li>
+      }
+    </div>
+    <div class="col-md-6">
+      <h4>Your flavors:</h4>
+        @foreach (Flavor flavor in ViewBag.UserFlavors)
+        {
+          <li>@Html.ActionLink($"{flavor.Description}","Details", new { id = flavor.FlavorId})</li>
+        }
+    </div>
+  </div>
 
 <hr />
 <ul class="menu-links">

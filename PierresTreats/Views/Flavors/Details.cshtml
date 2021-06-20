@@ -4,6 +4,7 @@
 
 @model PierresTreats.Models.Flavor
 @using PierresTreats.Models
+@using System.Security.Claims
 
 <h1>Flavor details</h1>
 <h3>@Html.DisplayFor(model => model.Description)</h3>
@@ -27,12 +28,15 @@
   <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id = join.Treat.TreatId}) </li>
 }
 
-<ul class="menu-links">
-  <li>@Html.ActionLink("Edit flavor details","Edit", new {id = Model.FlavorId })</li>
-  <li>@Html.ActionLink("Delete this flavor","Delete", new {id = Model.FlavorId })</li>
-  <li>@Html.ActionLink("Back to all flavors","Index")</li>
-  <li>@Html.ActionLink("Back to staff home","Index", "Account")</li>
-</ul>
+@if (User.Identity.IsAuthenticated)
+{
+  <ul class="menu-links">
+    <li>@Html.ActionLink("Edit flavor details","Edit", new {id = Model.FlavorId })</li>
+    <li>@Html.ActionLink("Delete this flavor","Delete", new {id = Model.FlavorId })</li>
+    <li>@Html.ActionLink("Back to all flavors","Index")</li>
+    <li>@Html.ActionLink("Back to staff home","Index", "Account")</li>
+  </ul>
+}
 
 <hr />
 <ul class="menu-links">
