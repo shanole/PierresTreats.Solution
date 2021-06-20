@@ -22,9 +22,8 @@
 {
   <li>There are no treats of this flavor.</li>
 }
-@foreach(var join in Model.JoinEntities)
+@foreach (var join in Model.JoinEntities)
 {
-  @* add link here *@
   <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id = join.Treat.TreatId}) </li>
 }
 
@@ -32,6 +31,7 @@
   <li>@Html.ActionLink("Edit flavor details","Edit", new {id = Model.FlavorId })</li>
   <li>@Html.ActionLink("Delete this flavor","Delete", new {id = Model.FlavorId })</li>
   <li>@Html.ActionLink("Back to all flavors","Index")</li>
+  <li>@Html.ActionLink("Back to staff home","Index", "Account")</li>
 </ul>
 
 <hr />
