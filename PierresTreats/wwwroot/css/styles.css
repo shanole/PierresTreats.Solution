@@ -13,3 +13,17 @@
 .menu-links li:nth-child(1) {
   padding-left: 0;
 }
+
+.vegan
+{
+  font-style: italic;
+  font-weight: bold;
+  color: green;
+}
+
+.gluten-free
+{
+  font-style: italic;
+  font-weight: bold;
+  color: darkgoldenrod;
+}
