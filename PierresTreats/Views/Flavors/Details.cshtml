@@ -22,9 +22,10 @@
 {
   <li>There are no treats of this flavor.</li>
 }
-@foreach(FlavorTreat join in Model.JoinEntities)
+@foreach(var join in Model.JoinEntities)
 {
-  @join.Treat.Name
+  @* add link here *@
+  <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id = join.Treat.TreatId}) </li>
 }
 
 <ul class="menu-links">
