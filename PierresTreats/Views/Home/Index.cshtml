@@ -2,9 +2,40 @@
   Layout = "_Layout";
 }
 
+@using PierresTreats.Models
+
 <h1>Pierre's Treats</h1>
 <p>Your place for treats of all flavors!</p>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Our treats:</h4>
+      @if (@ViewBag.TreatsList.Count == 0)
+      {
+        <h3>We currently do not have any treats.</h3>
+      }
+      @foreach(Treat treat in @ViewBag.TreatsList)
+      {
+        <li>@Html.ActionLink($"{treat.Name}","Details", "Treats", new {id = treat.TreatId})</li>
+      }
+    </div>
+    <div class="col-md-6">
+      <h4>Our flavors:</h4>
+      @if (@ViewBag.FlavorsList.Count == 0)
+      {
+        <h3>We currently do not have any flavors.</h3>
+      }
+
+      @foreach(Flavor flavor in @ViewBag.FlavorsList)
+      {
+        <li>@Html.ActionLink($"{flavor.Description}","Details", "Flavors", new {id = flavor.FlavorId})</li>
+      }
+    </div>
+  </div>
+</div>
+
+<hr />
 <ul class="menu-links">
   <li>@Html.ActionLink("Staff account center","Index","Account")</li>
 </ul>
