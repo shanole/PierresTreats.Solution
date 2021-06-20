@@ -9,6 +9,10 @@
 <h3>@Html.DisplayFor(model => model.Name)</h3>
 
 <p>List of flavors available for this treat:</p>
+@if (Model.JoinEntities.Count == 0)
+{
+  <li>Sorry, this treat is currently unavailable.</li>
+}
 @foreach(FlavorTreat join in Model.JoinEntities)
 {
   <li>@Html.ActionLink($"{join.Flavor.Description}", "Details", "Flavors", new {id = join.Flavor.FlavorId})
