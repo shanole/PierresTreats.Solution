@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Treat
+
+<h4>Edit treat details</h4>
+
+@using(Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TreatId)
+  @Html.Label("Name")
+  @Html.EditorFor(model => model.Name, new { @class = "form-control", required="required"})
+
+  @Html.Label("Add a flavor")
+  @Html.DropDownList("FlavorId")
+
+  <input type="submit" value="Save" class="btn btn-default" required="true" />
+}
+
+<hr />
+<ul class="menu-links">
+  <li>@Html.ActionLink("Back to treat details", "Details", new {id = Model.TreatId})</li>
+  <li>@Html.ActionLink("Back to all treats", "Index")</li>
+  <li>@Html.ActionLink("Home","Index","Home")</li>
+</ul>

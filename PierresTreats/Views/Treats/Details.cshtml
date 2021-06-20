@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PierresTreats.Models.Treat
+@using PierresTreats.Models
+
+<h1>Treat details</h1>
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+<p>List of flavors available for this treat:</p>
+@foreach(FlavorTreat join in Model.JoinEntities)
+{
+  <li>@Html.ActionLink($"{join.Flavor.Description}", "Details", "Flavors", new {id = join.Flavor.FlavorId})</li>
+}
+
+<ul class="menu-links">
+  <li>@Html.ActionLink("Edit treat details","Edit", new {id = Model.TreatId })</li>
+  <li>@Html.ActionLink("Delete this treat","Delete", new {id = Model.TreatId })</li>
+  <li>@Html.ActionLink("Back to all treats","Index")</li>
+</ul>
+
+<hr />
+<ul class="menu-links">
+  <li>@Html.ActionLink("Home","Index","Home")
+</ul>
